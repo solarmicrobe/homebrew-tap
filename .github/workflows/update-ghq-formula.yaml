@@ -1,0 +1,57 @@
+name: update ghq formula
+
+on:
+  repository_dispatch:
+    types:
+    - ghq_release
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Solarmicrobe ghq release tag
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-ghq-formula
+  cancel-in-progress: false
+
+jobs:
+  update:
+    timeout-minutes: 20
+    runs-on: macos-latest
+    env:
+      GHQ_TAG: ${{ github.event.client_payload.tag || inputs.tag }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+    - name: update formula
+      run: ruby scripts/update-ghq-formula.rb "${GHQ_TAG}"
+    - name: commit formula update
+      id: commit
+      run: |
+        if git diff --quiet -- Formula/ghq.rb; then
+          echo "Formula/ghq.rb already matches ${GHQ_TAG}"
+          echo "changed=false" >>"${GITHUB_OUTPUT}"
+          exit 0
+        fi
+
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add Formula/ghq.rb
+        git commit -m "formula: update ghq to ${GHQ_TAG#v}"
+        echo "changed=true" >>"${GITHUB_OUTPUT}"
+    - name: validate formula
+      run: |
+        brew untap solarmicrobe/tap || true
+        brew tap solarmicrobe/tap "${GITHUB_WORKSPACE}"
+        ruby -c Formula/ghq.rb
+        brew audit --strict --formula solarmicrobe/tap/ghq
+        brew style solarmicrobe/tap/ghq
+        brew fetch --formula solarmicrobe/tap/ghq
+    - name: push formula update
+      if: steps.commit.outputs.changed == 'true'
+      run: |
+        git push
