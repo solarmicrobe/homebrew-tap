@@ -5,11 +5,11 @@ require "digest"
 require "open-uri"
 
 tag = ARGV.fetch(0) do
-  abort "usage: #{$PROGRAM_NAME} vX.Y.Z-solarmicrobe.N"
+  abort "usage: #{$PROGRAM_NAME} vX.Y.Z+feature.feature"
 end
 
-unless tag.match?(/\Av\d+\.\d+\.\d+-solarmicrobe\.\d+\z/)
-  abort "tag must look like vX.Y.Z-solarmicrobe.N: #{tag}"
+unless tag.match?(/\Av\d+\.\d+\.\d+(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*|-solarmicrobe\.\d+)\z/)
+  abort "tag must look like vX.Y.Z+feature.feature: #{tag}"
 end
 
 version = tag.delete_prefix("v")
