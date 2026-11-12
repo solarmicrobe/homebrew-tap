@@ -1,30 +1,30 @@
 class Ghq < Formula
   desc "Remote repository management made easy"
   homepage "https://github.com/solarmicrobe/ghq"
-  version "1.10.1-solarmicrobe.2"
+  version "1.10.1+ignore-host.symlink"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1-solarmicrobe.2/ghq_darwin_arm64.zip"
-      sha256 "952986907416faa977122e6b97d76b26572496660712c5f864814efcc32981fa"
+      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1+ignore-host.symlink/ghq_darwin_arm64.zip"
+      sha256 "7f1e1e6410369e0c72c55be894bd14f0c1a588b05d61542c6de7dd0b71750a74"
     end
 
     on_intel do
-      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1-solarmicrobe.2/ghq_darwin_amd64.zip"
-      sha256 "207c69b1376b39b8a419acb7e7c10a1ac79e548f430e747935977055a8812551"
+      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1+ignore-host.symlink/ghq_darwin_amd64.zip"
+      sha256 "7e7017711d02eba7804217bc8edff6b7b773bd7dee581f6321be16caaa7c5a0f"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1-solarmicrobe.2/ghq_linux_arm64.zip"
-      sha256 "914e74a2885287b54e06df5c2ff3726a4b4222e92860eebe7e0dbe68c6006f69"
+      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1+ignore-host.symlink/ghq_linux_arm64.zip"
+      sha256 "bb9f4d263435c2752d481b65680277183e0905fa65bd7e6dbb4d35b38873e8f1"
     end
 
     on_intel do
-      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1-solarmicrobe.2/ghq_linux_amd64.zip"
-      sha256 "9025a239ab98ade0308991c7733bbd6e22489e75831f9123a207c0a2237bdd4f"
+      url "https://github.com/solarmicrobe/ghq/releases/download/v1.10.1+ignore-host.symlink/ghq_linux_amd64.zip"
+      sha256 "6c2bca4492f7d10ea2265139fa382513fb4084d596a7faac34b1043540d4337c"
     end
   end
 
