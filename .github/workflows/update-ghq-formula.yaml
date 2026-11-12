@@ -47,6 +47,7 @@ jobs:
       run: |
         brew untap solarmicrobe/tap || true
         brew tap solarmicrobe/tap "${GITHUB_WORKSPACE}"
+        brew trust solarmicrobe/tap
         ruby -c Formula/ghq.rb
         brew audit --strict --formula solarmicrobe/tap/ghq
         brew style solarmicrobe/tap/ghq
